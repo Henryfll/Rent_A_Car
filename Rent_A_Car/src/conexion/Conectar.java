@@ -26,4 +26,13 @@ public class Conectar {
         }
         return conect;
     }
+
+    public Connection getConect() {
+        return conect;
+    }
+
+    public void setConect(Connection conect) {
+        this.conect = conect;
+    }
+    
 }
