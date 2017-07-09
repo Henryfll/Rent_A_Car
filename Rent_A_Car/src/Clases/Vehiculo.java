@@ -23,13 +23,13 @@ public class Vehiculo {
     public String descripcion;
     public String marca;
     public String color;
-    public boolean alquilado;
+    public int alquilado;
     public String placa;
     Statement st;    //variable para ejecutar la instruccion SQL
     ResultSet rs;    //variable para almacenar el resultado de una consulta
     Conectar objconex = new Conectar();
 
-    public Vehiculo(int idoficina, String modelo, String descripcion, String marca, String color, boolean alquilado, String placa) {
+    public Vehiculo(int idoficina, String modelo, String descripcion, String marca, String color, int alquilado, String placa) {
         this.idoficina = idoficina;
         this.modelo = modelo;
         this.descripcion = descripcion;
@@ -42,8 +42,8 @@ public class Vehiculo {
 
         try {
             objconex.conexion();//conectamos a la BDD
-            String cadena = "insert into VEHICULO (IDOFICINA, MODELO, DESCRIPCION, MARCA, COLOR, ALQUILADO, PLACA) values ('" //cadena para guardar en la BDD
-                    + this.idoficina + "','"
+            String cadena = "insert into VEHICULO (IDOFICINA, MODELO, DESCRIPCION, MARCA, COLOR, ALQUILADO, PLACA) values (" //cadena para guardar en la BDD
+                    + this.idoficina + ",'"
                     + this.modelo + "','"
                     + this.descripcion + "','"
                     + this.marca + "','"

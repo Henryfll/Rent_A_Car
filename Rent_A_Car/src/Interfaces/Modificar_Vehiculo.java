@@ -227,20 +227,7 @@ public class Modificar_Vehiculo extends javax.swing.JInternalFrame {
         String color=txt_vehiculo_color.getText();
         boolean alquilado=false;
         String placa=txt_vehiculo_placa.getText();
-        if (modelo.equals("") || descripcion.equals("") || marca.equals("") || color.equals("") || placa.equals("")) {
-            JOptionPane.showMessageDialog(rootPane, "Falta llenar algun campo obligatorio");
-        } else {
-                Vehiculo objVehiculo =new Vehiculo(idoficina, modelo, descripcion, marca, color, alquilado, placa);
-                objVehiculo.NuevoVehiculo();
-                // Vaciar cuadros de texto
-                txt_vehiculo_Marca.setText(null);
-                txt_vehiculo_color.setText(null);
-                txt_vehiculo_descripcion.setText(null);
-                txt_vehiculo_modelo.setText(null);
-                txt_vehiculo_placa.setText(null);                
-                JOptionPane.showMessageDialog(rootPane, "Registro Exitoso");
-            
-        }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
