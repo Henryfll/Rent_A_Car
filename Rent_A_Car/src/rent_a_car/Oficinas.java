@@ -5,6 +5,9 @@
  */
 package rent_a_car;
 
+import Clases.Oficina;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author HenryF
@@ -59,7 +62,7 @@ public class Oficinas extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Encargado:");
 
-        cbo_Sucursal_ciudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbo_Sucursal_ciudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Latacunga", "Riobamba", "Quito", "Ambato" }));
 
         txt_Sucursal_direccion.setColumns(20);
         txt_Sucursal_direccion.setRows(5);
@@ -115,6 +118,11 @@ public class Oficinas extends javax.swing.JInternalFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
 
         jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
 
@@ -169,6 +177,29 @@ public class Oficinas extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String nombre = txt_Sucursal_nombre.getText();
+        String ciudad = cbo_Sucursal_ciudad.getSelectedItem().toString();
+        String direccion = txt_Sucursal_direccion.getText();
+        String encargado = txt_Sucursal_Encargado.getText();
+        
+        if (nombre.equals("") || ciudad.equals("") || direccion.equals("") || encargado.equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Falta llenar algun campo obligatorio");
+        } else {
+            
+                Oficina objOficina = new Oficina(nombre, ciudad, direccion, encargado);
+                objOficina.CrearOficina();
+                // Vaciar cuadros de texto
+                txt_Sucursal_Encargado.setText("");
+                txt_Sucursal_direccion.setText("");
+                txt_Sucursal_Encargado.setText("");
+                
+            
+                JOptionPane.showMessageDialog(rootPane, "Registro Exitoso");
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

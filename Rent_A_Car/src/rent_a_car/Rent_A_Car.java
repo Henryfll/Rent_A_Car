@@ -5,6 +5,9 @@
  */
 package rent_a_car;
 
+import Interfaces.frm_Inicio;
+import Interfaces.frm_Login;
+
 /**
  *
  * @author HenryF
@@ -15,7 +18,8 @@ public class Rent_A_Car {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        frm_Login oficina = new frm_Login();
+        oficina.setVisible(true);
     }
     
 }
