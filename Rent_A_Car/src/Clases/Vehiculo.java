@@ -38,6 +38,10 @@ public class Vehiculo {
         this.alquilado = alquilado;
         this.placa = placa;
     }
+
+    public Vehiculo() {
+    }
+    
     public void NuevoVehiculo() {
 
         try {
@@ -70,6 +74,26 @@ public class Vehiculo {
             JOptionPane.showMessageDialog(null,"Error::::"+ex);
             
         }
+    }
+    public void ModificarDatos(String id) {
+        try {
+            objconex.conexion();
+        String  cadena = "update VEHICULO set IDOFICINA='"+ this.idoficina + "',"
+                +"MODELO='" + this.modelo+ "',"
+                +"DESCRIPCION='" + this.descripcion + "'," 
+                +"MODELO='"+ this.modelo + "',"
+                +"COLOR='"+ this.color+"',"
+                +"PLACA='"+ this.placa + "' " 
+                + "where IDVEHICULO='" + id + "'";
+             System.out.println(cadena);
+            st=objconex.getConect().createStatement();
+            st.executeUpdate(cadena);
+        } catch (SQLException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Error::::"+ex);
+            
+        }
+        
     }
     public String BuscarVehiculo(String Id){
         String datos="";
@@ -120,7 +144,7 @@ public class Vehiculo {
                         rs.getString("DESCRIPCION")+"/"+
                         rs.getString("MARCA")+"/"+
                         rs.getString("COLOR")+"/"+
-                        rs.getBoolean("ALQUILADO")+"/"+
+                        rs.getInt("ALQUILADO")+"/"+
                         rs.getString("PLACA");
                 arrayVehiculos[pos]=datos;
                 pos++;

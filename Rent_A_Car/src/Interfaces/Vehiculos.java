@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import Clases.Oficina;
 import Clases.Vehiculo;
 import javax.swing.JOptionPane;
 
@@ -17,8 +18,16 @@ public class Vehiculos extends javax.swing.JInternalFrame {
     /**
      * Creates new form Vehiculos
      */
+    Oficina objo=new Oficina();
     public Vehiculos() {
         initComponents();
+        String [] datosOfi=objo.ConsultaOficinas();
+        for (int i = 0; i < datosOfi.length; i++) {
+        String oficinas=datosOfi[i].toString();
+          String [] partesOfi=oficinas.split("/");
+          String ofi=partesOfi[0]+"-"+partesOfi[1];
+          cbo_oficina.addItem(ofi);
+        }
     }
 
     /**
@@ -198,7 +207,9 @@ public class Vehiculos extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int idoficina=1;
+        String [] partesOfi=cbo_oficina.getSelectedItem().toString().split("-");
+          String ofi=partesOfi[0];
+        int idoficina=Integer.parseInt(ofi);
         String modelo= txt_vehiculo_modelo.getText();
         String descripcion=txt_vehiculo_descripcion.getText();
         String marca=txt_vehiculo_Marca.getText();
@@ -219,6 +230,7 @@ public class Vehiculos extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(rootPane, "Registro Exitoso");
             
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

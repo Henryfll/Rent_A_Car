@@ -5,6 +5,7 @@
  */
 package Interfaces;
 
+import Clases.Oficina;
 import Clases.Vehiculo;
 import javax.swing.JOptionPane;
 
@@ -14,11 +15,29 @@ import javax.swing.JOptionPane;
  */
 public class Modificar_Vehiculo extends javax.swing.JInternalFrame {
 
+    
     /**
      * Creates new form Vehiculos
      */
-    public Modificar_Vehiculo() {
+    public Modificar_Vehiculo(String id) {
         initComponents();
+        lb_id.setText(id);
+        Vehiculo objv=new Vehiculo();
+        String d=objv.BuscarVehiculo(id);
+        String[]dp=d.split("/");
+        txt_vehiculo_modelo.setText(dp[1].toString());
+        txt_vehiculo_descripcion.setText(dp[2].toString());
+        txt_vehiculo_Marca.setText(dp[3].toString());
+        txt_vehiculo_color.setText(dp[4].toString());
+        txt_vehiculo_placa.setText(dp[6].toString());
+        Oficina objo=new Oficina();
+        String [] datosOfi=objo.ConsultaOficinas();
+        for (int i = 0; i < datosOfi.length; i++) {
+        String oficinas=datosOfi[i].toString();
+          String [] partesOfi=oficinas.split("/");
+          String ofi=partesOfi[0]+"-"+partesOfi[1];
+          cbo_oficina.addItem(ofi);
+        }
     }
 
     /**
@@ -46,11 +65,10 @@ public class Modificar_Vehiculo extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         cbo_oficina = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        lb_id = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -80,7 +98,7 @@ public class Modificar_Vehiculo extends javax.swing.JInternalFrame {
 
         jLabel8.setText("Id:");
 
-        jLabel9.setText(".....");
+        lb_id.setText(".....");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,7 +131,7 @@ public class Modificar_Vehiculo extends javax.swing.JInternalFrame {
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
+                            .addComponent(lb_id)
                             .addComponent(cbo_oficina, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -123,7 +141,7 @@ public class Modificar_Vehiculo extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel9))
+                    .addComponent(lb_id))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -161,19 +179,20 @@ public class Modificar_Vehiculo extends javax.swing.JInternalFrame {
         });
 
         jButton2.setText("Cancelar:");
-
-        jButton3.setText("Eliminar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jButton3))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 24, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -183,9 +202,7 @@ public class Modificar_Vehiculo extends javax.swing.JInternalFrame {
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -220,22 +237,32 @@ public class Modificar_Vehiculo extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        int idoficina=1;
+        String [] partesOfi=cbo_oficina.getSelectedItem().toString().split("-");
+          String ofi=partesOfi[0];
+        int idoficina=Integer.parseInt(ofi);
         String modelo= txt_vehiculo_modelo.getText();
         String descripcion=txt_vehiculo_descripcion.getText();
         String marca=txt_vehiculo_Marca.getText();
         String color=txt_vehiculo_color.getText();
         boolean alquilado=false;
         String placa=txt_vehiculo_placa.getText();
+        Vehiculo objv=new Vehiculo(idoficina, modelo, descripcion, marca, color, ALLBITS, placa);
+        objv.ModificarDatos(lb_id.getText().toString());
+        JOptionPane.showMessageDialog(rootPane, "Datos Modificados");
+        dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbo_oficina;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -244,10 +271,10 @@ public class Modificar_Vehiculo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lb_id;
     private javax.swing.JTextField txt_vehiculo_Marca;
     private javax.swing.JTextField txt_vehiculo_color;
     private javax.swing.JTextArea txt_vehiculo_descripcion;
