@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
  *
  * @author HenryF
  */
-public class Mofiicar_Vehiculo extends javax.swing.JInternalFrame {
+public class Modificar_Vehiculo extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form Vehiculos
      */
-    public Mofiicar_Vehiculo() {
+    public Modificar_Vehiculo() {
         initComponents();
     }
 

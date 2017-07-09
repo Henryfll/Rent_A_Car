@@ -153,7 +153,7 @@ public class G_vehiculos extends javax.swing.JInternalFrame {
 
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
         // TODO add your handling code here:
-         Mofiicar_Vehiculo vehi = new Mofiicar_Vehiculo();
+         Modificar_Vehiculo vehi = new Modificar_Vehiculo();
         frm_Inicio.panelPrincipal.add(vehi);
         vehi.toFront();
         vehi.setVisible(true);
