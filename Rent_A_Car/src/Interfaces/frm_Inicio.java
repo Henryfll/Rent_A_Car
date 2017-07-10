@@ -6,7 +6,7 @@
 package Interfaces;
 
 import rent_a_car.Clientes;
-import rent_a_car.Oficinas;
+import Interfaces.Oficinas;
 
 /**
  *
@@ -55,6 +55,11 @@ public class frm_Inicio extends javax.swing.JFrame {
         jMenu1.setText("Gestionar");
 
         jMenuItem1.setText("Vehiculos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setText("Oficinas");
@@ -101,6 +106,13 @@ public class frm_Inicio extends javax.swing.JFrame {
         panelPrincipal.add(inf_Oficina);
         inf_Oficina.show();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        G_vehiculos g_vehi = new G_vehiculos();
+        panelPrincipal.add(g_vehi);
+        g_vehi.show();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
@@ -151,6 +163,6 @@ public class frm_Inicio extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JDesktopPane panelPrincipal;
+    public static javax.swing.JDesktopPane panelPrincipal;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rent_a_car;
+package Interfaces;
 
 import Clases.Oficina;
 import javax.swing.JOptionPane;

@@ -9,6 +9,8 @@ import conexion.Conectar;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -30,6 +32,9 @@ public class Oficina {
         this.direccion = direccion;
         this.encargado = encargado;
     }
+
+    public Oficina() {
+    }
         
     public void CrearOficina() {
 
@@ -47,5 +52,36 @@ public class Oficina {
             JOptionPane.showMessageDialog(null, "Error: "+ex.getMessage());
         }
 
+    }
+    public String[] ConsultaOficinas(){
+        String[] arrayVehiculos=null;
+        String datos="";
+         try {
+            objconex.conexion();
+             String cadena="select * from OFICINA";
+            st=objconex.getConect().createStatement();
+            rs=st.executeQuery(cadena);
+            
+           int numero_Registros= 0;
+           while(rs.next()){
+               numero_Registros++;
+           }
+           System.out.println("NUMERO DE REGISTOS "+numero_Registros);
+           arrayVehiculos = new String [numero_Registros];
+           int pos=0;
+           rs.beforeFirst();
+            while(rs.next()){
+                datos=datos+rs.getInt("IDOIFICINA")+"/"+
+                        rs.getString("NOMBRE");
+                arrayVehiculos[pos]=datos;
+                pos++;
+                datos="";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Oficina.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Error::::"+ex);
+            
+        }
+        return (arrayVehiculos);
     }
 }
