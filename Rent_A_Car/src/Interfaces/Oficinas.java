@@ -45,6 +45,7 @@ public class Oficinas extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
@@ -125,6 +126,11 @@ public class Oficinas extends javax.swing.JInternalFrame {
         });
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -194,12 +200,24 @@ public class Oficinas extends javax.swing.JInternalFrame {
                 txt_Sucursal_Encargado.setText("");
                 txt_Sucursal_direccion.setText("");
                 txt_Sucursal_Encargado.setText("");
-                
-            
+                G_oficinas ofinas = new G_oficinas();
+                frm_Inicio.panelPrincipal.add(ofinas);
+                ofinas.toFront();
+                ofinas.setVisible(true);
+                this.setVisible(false);
                 JOptionPane.showMessageDialog(rootPane, "Registro Exitoso");
+                
             
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        G_oficinas ofinas = new G_oficinas();
+                frm_Inicio.panelPrincipal.add(ofinas);
+                ofinas.toFront();
+                ofinas.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
