@@ -116,9 +116,9 @@ public class frm_Inicio extends javax.swing.JFrame {
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
-        Clientes inf_Cliente = new Clientes();
-        panelPrincipal.add(inf_Cliente);
-        inf_Cliente.show();
+        G_clientes g_cli = new G_clientes();
+        panelPrincipal.add(g_cli);
+        g_cli.show();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
