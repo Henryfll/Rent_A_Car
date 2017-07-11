@@ -53,8 +53,63 @@ public class Oficina {
         }
 
     }
-    public String[] ConsultaOficinas(){
-        String[] arrayVehiculos=null;
+    
+    public void EliminarDatos(String Id) {
+       
+        try {
+            objconex.conexion();
+             String cadena = "delete from OFICINA where IDOFICINA='" + Id +"'";
+            st=objconex.getConect().createStatement();
+            st.executeUpdate(cadena);
+            JOptionPane.showMessageDialog(null,"Registro Eliminado");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,"Error::::"+ex);
+            
+        }
+    }
+    public void ModificarDatos(String id) {
+        try {
+            objconex.conexion();
+        String  cadena = "update OFICINA set NOMBRE='"+ this.nombre + "',"
+                +"CIUDAD='" + this.ciudad+ "',"
+                +"DIRECCION='" + this.direccion + "'," 
+                +"ENCARGADO='"+ this.encargado + "' " 
+                + "where IDOFICINA='" + id + "'";
+             System.out.println(cadena);
+            st=objconex.getConect().createStatement();
+            st.executeUpdate(cadena);
+        } catch (SQLException ex) {
+            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Error::::"+ex);
+            
+        }
+        
+    }
+    public String BuscarOficina(String Id){
+        String datos="";
+         try {
+            objconex.conexion();
+             String cadena="select * from OFICINA where IDOFICINA='"+Id+"'";
+            st=objconex.getConect().createStatement();
+            rs=st.executeQuery(cadena);
+            while(rs.next()){
+                datos=datos+rs.getString("NOMBRE")+"/"+
+                        rs.getString("CIUDAD")+"/"+
+                        rs.getString("DIRECCION")+"/"+
+                        rs.getString("ENCARGADO");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Oficina.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Error::::"+ex);
+            
+        }
+         
+        
+        return(datos);
+    }
+    
+    public String[] ConsultaGeneral(){
+        String[] arrayOficinas=null;
         String datos="";
          try {
             objconex.conexion();
@@ -67,13 +122,16 @@ public class Oficina {
                numero_Registros++;
            }
            System.out.println("NUMERO DE REGISTOS "+numero_Registros);
-           arrayVehiculos = new String [numero_Registros];
+           arrayOficinas = new String [numero_Registros];
            int pos=0;
            rs.beforeFirst();
             while(rs.next()){
-                datos=datos+rs.getInt("IDOIFICINA")+"/"+
-                        rs.getString("NOMBRE");
-                arrayVehiculos[pos]=datos;
+                datos=datos+rs.getInt("IDOFICINA")+"/"+
+                        rs.getString("NOMBRE")+"/"+
+                        rs.getString("CIUDAD")+"/"+
+                        rs.getString("DIRECCION")+"/"+
+                        rs.getString("ENCARGADO");
+                arrayOficinas[pos]=datos;
                 pos++;
                 datos="";
             }
@@ -82,6 +140,38 @@ public class Oficina {
             JOptionPane.showMessageDialog(null,"Error::::"+ex);
             
         }
-        return (arrayVehiculos);
+        return (arrayOficinas);
+    }
+    
+    public String[] ConsultaOficinas(){
+        String[] arrayOficinas=null;
+        String datos="";
+         try {
+            objconex.conexion();
+             String cadena="select * from OFICINA";
+            st=objconex.getConect().createStatement();
+            rs=st.executeQuery(cadena);
+            
+           int numero_Registros= 0;
+           while(rs.next()){
+               numero_Registros++;
+           }
+           System.out.println("NUMERO DE REGISTOS "+numero_Registros);
+           arrayOficinas = new String [numero_Registros];
+           int pos=0;
+           rs.beforeFirst();
+            while(rs.next()){
+                datos=datos+rs.getInt("IDOFICINA")+"/"+
+                        rs.getString("NOMBRE");
+                arrayOficinas[pos]=datos;
+                pos++;
+                datos="";
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Oficina.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Error::::"+ex);
+            
+        }
+        return (arrayOficinas);
     }
 }

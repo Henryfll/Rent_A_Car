@@ -102,9 +102,9 @@ public class frm_Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        Oficinas inf_Oficina = new Oficinas();
-        panelPrincipal.add(inf_Oficina);
-        inf_Oficina.show();
+        G_oficinas int_Oficina = new G_oficinas();
+        panelPrincipal.add(int_Oficina);
+        int_Oficina.show();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
