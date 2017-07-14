@@ -9,6 +9,8 @@ import conexion.Conectar;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -41,5 +43,27 @@ public class Usuario {
             JOptionPane.showMessageDialog(null, "Error: "+ex.getMessage());
         }
 
+    }
+    public String ValidarUsuario(String user){
+        String tem="";
+         try {
+            objconex.conexion();
+            String cadena="select * from USUARIO where USER='"+user+"'";
+            st=objconex.getConect().createStatement();
+            rs=st.executeQuery(cadena);
+            while(rs.next()){
+                tem=rs.getString("CONTRASENA");
+            }
+            
+                return tem;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Oficina.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null,"Error::::"+ex);
+            return tem;
+        }
+         
+        
+        
     }
 }
